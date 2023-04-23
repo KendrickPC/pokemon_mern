@@ -64,7 +64,11 @@ const ProductPage = ({match}) => {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                <Button className='btn-block w-100' type='button'>
+                <Button 
+                  className='btn-block w-100' 
+                  type='button'
+                  disabled={product.countInStock === 0}
+                >
                   Add To Cart
                 </Button>  
               </ListGroup.Item>
