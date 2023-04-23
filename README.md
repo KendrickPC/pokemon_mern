@@ -1,1 +1,1 @@
-# pokemon_mern
+# Ken's Pokemon Shop
