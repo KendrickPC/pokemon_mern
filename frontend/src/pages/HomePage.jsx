@@ -11,7 +11,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       // data destructured from res.data
-      const {data} = await axios.get('/api/products')
+      const {data} = await axios.get(`/api/products`)
       setProducts(data)
     }
     fetchProducts()
