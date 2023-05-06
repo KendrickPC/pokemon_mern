@@ -78,7 +78,6 @@ const CartPage = ({match, location, history }) => {
                     >
                       <i className='fas fa-trash'></i>
                     </Button>
-                    
                   </Col>
                 </Row>
               </ListGroup.Item>
@@ -90,7 +89,9 @@ const CartPage = ({match, location, history }) => {
         <Card>
           <ListGroup variant='flush'>
             <ListGroup.Item>
-              <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
+              <h2>
+                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items
+              </h2>
               ${cartItems.reduce( (acc, item) => acc + item.qty * item.price, 0).toFixed(2)}
             </ListGroup.Item>
             <ListGroup.Item>
@@ -102,7 +103,6 @@ const CartPage = ({match, location, history }) => {
         </Card>
       </Col>
     </Row>
-    
   )
 }
 
