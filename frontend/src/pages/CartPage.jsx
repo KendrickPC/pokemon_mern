@@ -28,8 +28,22 @@ const CartPage = ({match, location, history }) => {
       dispatch(addToCart(productId, qty))
     }
   }, [dispatch, productId, qty])
+
   return (
-    <div>CartPage</div>
+    <Row>
+      <Col md={8}>
+        <h1>Shopping Cart</h1>
+        {cartItems.length === 0 ? <Message >Your cart is empty buddy! <Link to='/'>Go Back</Link></Message> : (
+          <ListGroup variant='flush'>
+
+          </ListGroup>
+        )}
+      </Col>
+      <Col md={2}>
+        
+      </Col>
+    </Row>
+    
   )
 }
 
