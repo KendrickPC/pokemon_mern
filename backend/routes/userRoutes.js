@@ -16,6 +16,4 @@ router.get('/profile', protect, getUserProfile)
 // localhost:3000/api/users
 router.post('/', registerUser)
 
-
-
 export default router
