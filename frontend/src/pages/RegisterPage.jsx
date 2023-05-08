@@ -16,16 +16,16 @@ const RegisterPage = ({location, history}) => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
 
-  const redirect = location.search ? 
-      location.search.split('=')[1] : 
-      '/'
+ 
 
   const dispatch = useDispatch()
 
   const userRegister = useSelector(state => state.userRegister)
   const {userInfo, loading, error } = userRegister
 
-
+  const redirect = location.search ? 
+  location.search.split('=')[1] : 
+  '/'
 
   useEffect( () => {
     if (userInfo) {
@@ -90,7 +90,9 @@ const RegisterPage = ({location, history}) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type='submit' variant='primary'>Register</Button>
+        <Button type='submit' variant='primary'>
+          Register
+        </Button>
       </Form>
 
       {/* Already registered? Redirect back to LOGIN */}

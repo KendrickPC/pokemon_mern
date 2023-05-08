@@ -22,10 +22,6 @@ const authUser = asyncHandler(async (req, res) => {
     res.status(401)
     throw new Error('Invalid email or pw')
   }
-  return res.send({
-    email, 
-    password
-  })
 })
 
 // @desc    GET user profile

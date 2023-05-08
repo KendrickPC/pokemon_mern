@@ -47,7 +47,10 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
+  // Setting userInfo to null
   dispatch({type: USER_LOGOUT})
+  
+  // dispatch({type: USER_LOGOUT_SUCCESS, payload: null});
 }
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -55,6 +58,7 @@ export const register = (name, email, password) => async (dispatch) => {
     dispatch({
       type: USER_REGISTER_REQUEST
     })
+    
     const config = {
       headers: {
         'Content-Type': 'application/json'
