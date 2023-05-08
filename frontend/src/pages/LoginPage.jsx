@@ -42,7 +42,7 @@ const LoginPage = ({location, history}) => {
           <Form.Control 
             type='email' 
             placeholder='enter email'
-            value='email'
+            value={email}
             onChange={(evt) => setEmail(evt.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -52,7 +52,7 @@ const LoginPage = ({location, history}) => {
           <Form.Control 
             type='password' 
             placeholder='enter password'
-            value='password'
+            value={password}
             onChange={(evt) => setPassword(evt.target.value)}
           ></Form.Control>
         </Form.Group>

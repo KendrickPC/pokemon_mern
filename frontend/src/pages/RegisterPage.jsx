@@ -51,6 +51,7 @@ const RegisterPage = ({location, history}) => {
           <Form.Control 
             type='name' 
             placeholder='enter name'
+            value={name}
             onChange={(e) => setName(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -60,6 +61,7 @@ const RegisterPage = ({location, history}) => {
           <Form.Control 
             type='email' 
             placeholder='enter email'
+            value='email'
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -69,6 +71,7 @@ const RegisterPage = ({location, history}) => {
           <Form.Control 
             type='password' 
             placeholder='enter password'
+            value='password'
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -78,6 +81,7 @@ const RegisterPage = ({location, history}) => {
           <Form.Control 
             type='confirmPassword' 
             placeholder='CONFIRM password'
+            value='confirmPassword'
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -85,6 +89,7 @@ const RegisterPage = ({location, history}) => {
         <Button type='submit' variant='primary'>Signing IN</Button>
       </Form>
 
+      {/* Already registered? Redirect back to LOGIN */}
       <Row className='py-3'>
         <Col>
           <span>New Customer?   </span>  
