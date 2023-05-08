@@ -35,13 +35,17 @@ const RegisterPage = ({location, history}) => {
 
   const submitHandler = (evt) => {
     evt.preventDefault()
-    // dispatch(login(email, password))
-    // DISPATCH REGISTER
+    if (password !== confirmPassword) {
+      setMessage('Passwords do not match')
+    } else {
+      dispatch(register(name, email, password))
+    }
   }
 
   return (
     <FormContainer>
       <h1>SIGN UP</h1>
+      {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
@@ -52,7 +56,7 @@ const RegisterPage = ({location, history}) => {
             type='name' 
             placeholder='enter name'
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(evt) => setName(evt.target.value)}
           ></Form.Control>
         </Form.Group>
         {/* email group */}
@@ -61,8 +65,8 @@ const RegisterPage = ({location, history}) => {
           <Form.Control 
             type='email' 
             placeholder='enter email'
-            value='email'
-            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            onChange={(evt) => setEmail(evt.target.value)}
           ></Form.Control>
         </Form.Group>
         {/* password group */}
@@ -71,32 +75,32 @@ const RegisterPage = ({location, history}) => {
           <Form.Control 
             type='password' 
             placeholder='enter password'
-            value='password'
-            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            onChange={(evt) => setPassword(evt.target.value)}
           ></Form.Control>
         </Form.Group>
         {/* CONFIRM password group */}
         <Form.Group controlId='confirmPassword'>
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control 
-            type='confirmPassword' 
+            type='password' 
             placeholder='CONFIRM password'
-            value='confirmPassword'
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={confirmPassword}
+            onChange={(evt) => setConfirmPassword(evt.target.value)}
           ></Form.Control>
         </Form.Group>
 
-        <Button type='submit' variant='primary'>Signing IN</Button>
+        <Button type='submit' variant='primary'>Register</Button>
       </Form>
 
       {/* Already registered? Redirect back to LOGIN */}
       <Row className='py-3'>
         <Col>
-          <span>New Customer?   </span>  
+          <span>Have an Account Already?   </span>  
           <Link to={redirect ? 
-            `/register?redirect=${redirect}` :
-            '/register'}>
-            Register
+            `/login?redirect=${redirect}` :
+            '/login'}>
+            Login
           </Link>
           
 
