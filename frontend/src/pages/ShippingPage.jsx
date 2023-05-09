@@ -19,14 +19,12 @@ const ShippingPage = ({history}) => {
 
   const submitHandler = (evt) => {
     evt.preventDefault()
-    console.log('Submit Handler Clicked!')
     dispatch(saveShippingAddress({address, city, postalCode, country}))
     history.push('/payment')
 
   }
 
-  return (
-    <FormContainer>
+  return <FormContainer>
       <CheckoutSteps step1 step2/>
       <h1>Shipping</h1>
       <Form onSubmit={submitHandler}>
@@ -36,7 +34,8 @@ const ShippingPage = ({history}) => {
           <Form.Control 
             type='text'
             placeholder='enter address'
-            value={address || ''}
+            value={address}
+            // value={address || ''}
             required
             onChange={(evt) => setAddress(evt.target.value)}
           ></Form.Control>
@@ -79,7 +78,7 @@ const ShippingPage = ({history}) => {
         </Button>
       </Form>
     </FormContainer>
-  )
+
 }
 
 export default ShippingPage
