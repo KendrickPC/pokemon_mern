@@ -46,7 +46,9 @@ const PaymentPage = ({history}) => {
             id='Stripe' 
             name='paymentMethod' 
             value='Stripe' 
-            onChange={(evt) => setPaymentMethod(evt.target.value)}
+            checked={paymentMethod === 'Stripe'} 
+            // onChange={(evt) => setPaymentMethod(evt.target.value)}
+            onClick={() => setPaymentMethod('Stripe')}
           ></Form.Check>
           </Col>
         </Form.Group>
