@@ -16,6 +16,17 @@ import CheckoutSteps from '../components/CheckoutSteps';
 const PlaceOrderPage = () => {
   // const dispatch = useDispatch()
   const cart = useSelector(state => state.cart)
+  
+  // Fixing decimal lengths to two decimal places
+  const addDecimals = (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2)
+  }
+  // Calculating item(s) price
+  cart.itemsPrice = addDecimals(cart.cartItems.reduce( (acc, item) => acc + item.price * item.qty, 0))
+  // Shipping price (if order is over $100 USD --> free shipping)
+  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 20)
+  cart.taxPrice = addDecimals(Number( (0.10 * cart.itemsPrice).toFixed(2)  ))
+  cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
 
   const placeOrderHandler = () => {
     console.log('place order button clicked')
