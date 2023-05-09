@@ -12,8 +12,11 @@ import { Link } from 'react-router-dom/';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
+import {createOrder} from '../actions/orderActions'
 
 const PlaceOrderPage = () => {
+  const dispatch = useDispatch()
+
   // const dispatch = useDispatch()
   const cart = useSelector(state => state.cart)
   
@@ -29,7 +32,16 @@ const PlaceOrderPage = () => {
   cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
 
   const placeOrderHandler = () => {
-    console.log('place order button clicked')
+    dispatch(createOrder({
+      orderItems: cart.cartItems,
+      shippingAddress: cart.shippingAddress,
+      paymentMethod: cart.paymentMethod,
+      itemsPrice: cart.itemsPrice,
+      shippingPrice: cart.shippingPrice,
+      taxPrice: cart.taxPrice,
+      totalPrice: cart.totalPrice
+    }))
+
   }
 
 
