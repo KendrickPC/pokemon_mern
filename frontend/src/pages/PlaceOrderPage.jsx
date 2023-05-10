@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Button,
   Row,
@@ -14,7 +14,7 @@ import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
 import {createOrder} from '../actions/orderActions'
 
-const PlaceOrderPage = () => {
+const PlaceOrderPage = ({history}) => {
   const dispatch = useDispatch()
 
   // const dispatch = useDispatch()
@@ -31,6 +31,16 @@ const PlaceOrderPage = () => {
   cart.taxPrice = addDecimals(Number( (0.10 * cart.itemsPrice).toFixed(2)  ))
   cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
 
+  const orderCreate = useSelector(state => state.orderCreate)
+  const {order, success, error} = orderCreate
+
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`)
+    }
+    // eslint-disable-next-line 
+  }, [history, success])
+
   const placeOrderHandler = () => {
     dispatch(createOrder({
       orderItems: cart.cartItems,
@@ -41,9 +51,7 @@ const PlaceOrderPage = () => {
       taxPrice: cart.taxPrice,
       totalPrice: cart.totalPrice
     }))
-
   }
-
 
   return (
     <>
@@ -125,7 +133,11 @@ const PlaceOrderPage = () => {
                 <Col>${cart.totalPrice}</Col>
               </Row>
             </ListGroup.Item>
-            
+
+            <ListGroup>
+              {error && <Message variant='danger'>{error}</Message>}
+            </ListGroup>
+
             <ListGroup.Item>
               <Button 
                 type='button' 
