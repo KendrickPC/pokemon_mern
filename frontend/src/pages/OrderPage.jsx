@@ -20,15 +20,6 @@ const OrderPage = ({match}) => {
   const orderDetails = useSelector(state => state.orderDetails)
   const {order, loading, error} = orderDetails
   
-  // if (!loading) {
-  //   // Fixing decimal lengths to two decimal places
-  //   const addDecimals = (num) => {
-  //     return (Math.round(num * 100) / 100).toFixed(2)
-  //   }
-  //   // Calculating item(s) price
-  //   order.itemsPrice = addDecimals(order.orderItems.reduce( (acc, item) => acc + item.price * item.qty, 0))
-  // }
-
   useEffect(() => {
     // Check for the order and also make sure that the order ID matches the ID in the URL. 
     // If it does not, then dispatch getOrderDetails() to fetch the most recent order

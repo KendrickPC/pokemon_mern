@@ -50,7 +50,36 @@ const getOrderById = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc    Update order to paid
+// @route   GET /api/orders/:id/pay
+// @access  Private
+const updateOrderToPaid = asyncHandler(async (req, res) => {
+  // populates the user property of the document with the name and email fields
+  // from the corresponding user document
+  const order = await Order.findById(req.params.id)
+
+  if (order) {
+    order.isPaid = true
+    order.paidAt = Date.now()
+    // The following object comes from the PayPal response
+    order.paymentMethod = {
+      id: req.body.id,
+      status: req.body.status,
+      update_time: req.body.update_time,
+      email_addresss: req.body.payer.email_address
+    }
+
+    const updatedOrder = await order.save()
+
+    res.json(updatedOrder)
+  } else {
+    res.status(404)
+    throw new Error('Order Not Found Buddy in updateOrrderToPaid ! Try Again!')
+  }
+})
+
 export {
   addOrderItems,
-  getOrderById
+  getOrderById,
+  updateOrderToPaid
 }
