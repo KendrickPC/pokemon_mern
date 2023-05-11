@@ -30,8 +30,12 @@ const OrderPage = ({match}) => {
   // }
 
   useEffect(() => {
-    dispatch(getOrderDetails(orderId))
-  }, [])
+    // Check for the order and also make sure that the order ID matches the ID in the URL. 
+    // If it does not, then dispatch getOrderDetails() to fetch the most recent order
+    if (!order || order._id !== orderId) {
+      dispatch(getOrderDetails(orderId))
+    }
+  }, [order, orderId])
 
   return loading ? <Loader /> : error ? 
     <Message variant='danger'>{error}</Message> :
