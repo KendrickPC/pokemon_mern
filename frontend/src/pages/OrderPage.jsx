@@ -66,6 +66,7 @@ const OrderPage = ({match}) => {
   return loading ? <Loader /> : error ? 
     <Message variant='danger'>{error}</Message> :
     <>
+    {/* <h1>WE IN HERE ORDER! {order}</h1> */}
     <h1>Order {order._id}</h1>
     <Row>
         <Col md={8}>
@@ -83,7 +84,7 @@ const OrderPage = ({match}) => {
                 {order.shippingAddress.country},
               </p>
               {order.isDelivered ? 
-              <Message variant='succes'>Delivered on {order.deliveredAt}</Message> : 
+              <Message variant='success'>Delivered on {order.deliveredAt}</Message> : 
               <Message variant='danger'>Not Delivered</Message>}
             </ListGroup.Item>
             

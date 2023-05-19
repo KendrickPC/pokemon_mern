@@ -6,7 +6,7 @@ import {saveShippingAddress} from '../actions/cartActions'
 import CheckoutSteps from '../components/CheckoutSteps'
 
 
-const ShippingPage = ({history}) => {
+const ShippingPage = ({ history }) => {
   const cart = useSelector(state => state.cart)
   const {shippingAddress} = cart
 
@@ -24,7 +24,8 @@ const ShippingPage = ({history}) => {
 
   }
 
-  return <FormContainer>
+  return (
+    <FormContainer>
       <CheckoutSteps step1 step2/>
       <h1>Shipping</h1>
       <Form onSubmit={submitHandler}>
@@ -78,7 +79,7 @@ const ShippingPage = ({history}) => {
         </Button>
       </Form>
     </FormContainer>
-
+  )
 }
 
 export default ShippingPage

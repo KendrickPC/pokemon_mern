@@ -6,15 +6,18 @@ import CheckoutSteps from '../components/CheckoutSteps'
 import {savePaymentMethod} from '../actions/cartActions'
 
 
-const PaymentPage = ({history}) => {
-  const cart = useSelector(state => state.cart)
+const PaymentPage = ({ history }) => {
+  const cart = useSelector( (state) => state.cart)
   const {shippingAddress} = cart
+
+  console.log('shippingAddress:::', shippingAddress);
 
   if (!shippingAddress) {
     history.push('/shipping')
   }
 
   const [paymentMethod, setPaymentMethod] = useState('PayPal')
+
   const dispatch = useDispatch()
   
   const submitHandler = (evt) => {
@@ -37,7 +40,7 @@ const PaymentPage = ({history}) => {
             id='PayPal' 
             name='paymentMethod' 
             value='PayPal' 
-            checked 
+            defaultChecked
             onChange={(evt) => setPaymentMethod(evt.target.value)}
           ></Form.Check>
           <Form.Check 
@@ -47,7 +50,7 @@ const PaymentPage = ({history}) => {
             name='paymentMethod' 
             value='Stripe' 
             checked={paymentMethod === 'Stripe'} 
-            // onChange={(evt) => setPaymentMethod(evt.target.value)}
+            onChange={(evt) => setPaymentMethod(evt.target.value)}
             onClick={() => setPaymentMethod('Stripe')}
           ></Form.Check>
           </Col>
@@ -55,7 +58,7 @@ const PaymentPage = ({history}) => {
 
         <Button type='submit' variant='primary'>
           Continue
-        </Button>
+        </Button> 
       </Form>
     </FormContainer>
   )

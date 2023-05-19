@@ -57,8 +57,12 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   // populates the user property of the document with the name and email fields
   // from the corresponding user document
   const order = await Order.findById(req.params.id)
-
+  
   if (order) {
+
+    console.log("updateOrderToPaid ORDER", order)
+    
+    
     order.isPaid = true
     order.paidAt = Date.now()
     // The following object comes from the PayPal response
@@ -66,7 +70,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
       id: req.body.id,
       status: req.body.status,
       update_time: req.body.update_time,
-      email_addresss: req.body.payer.email_address
+      email_address: req.body.payer.email_address
     }
 
     const updatedOrder = await order.save()
