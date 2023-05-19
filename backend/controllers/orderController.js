@@ -59,23 +59,19 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id)
   
   if (order) {
-
-    console.log("updateOrderToPaid ORDER", order)
-    
-    
     order.isPaid = true
     order.paidAt = Date.now()
     // The following object comes from the PayPal response
-    order.paymentMethod = {
+    order.paymentMethod = JSON.stringify({
       id: req.body.id,
       status: req.body.status,
       update_time: req.body.update_time,
       email_address: req.body.payer.email_address
-    }
+    })
 
-    const updatedOrder = await order.save()
+    await order.save()
+    res.json(order)
 
-    res.json(updatedOrder)
   } else {
     res.status(404)
     throw new Error('Order Not Found Buddy in updateOrrderToPaid ! Try Again!')
