@@ -19,7 +19,8 @@ const PlaceOrderPage = ({history}) => {
 
   // const dispatch = useDispatch()
   const cart = useSelector(state => state.cart)
-  
+  console.log("CART!!! PLACEORDERPAGE.jsx:::", cart)
+
   // Fixing decimal lengths to two decimal places
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)

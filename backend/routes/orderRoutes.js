@@ -8,12 +8,15 @@ import {
 import { protect } from '../middleware/authMiddleware.js'
 
 // localhost:3000/api/orders
-router.post('/', protect, addOrderItems)
+// router.post('/', protect, addOrderItems)
+router.route('/').post(protect, addOrderItems)
 
 // localhost:3000/api/orders/:id
-router.get('/:id', protect, getOrderById)
+// router.get('/:id', protect, getOrderById)
+router.route('/:id').get(protect, getOrderById)
 
 // localhost:3000/api/orders/:id/pay
-router.put('/:id/pay', protect, updateOrderToPaid)
+// router.put('/:id/pay', protect, updateOrderToPaid)
+router.route('/:id/pay').put(protect, updateOrderToPaid)
 
 export default router

@@ -40,10 +40,10 @@ const PaymentPage = ({ history }) => {
             id='PayPal' 
             name='paymentMethod' 
             value='PayPal' 
-            defaultChecked
-            onChange={(evt) => setPaymentMethod(evt.target.value)}
+            checked
+            onChange={(e) => setPaymentMethod(e.target.value)}
           ></Form.Check>
-          <Form.Check 
+          {/* <Form.Check 
             type='radio' 
             label='Stripe' 
             id='Stripe' 
@@ -52,7 +52,7 @@ const PaymentPage = ({ history }) => {
             checked={paymentMethod === 'Stripe'} 
             onChange={(evt) => setPaymentMethod(evt.target.value)}
             onClick={() => setPaymentMethod('Stripe')}
-          ></Form.Check>
+          ></Form.Check> */}
           </Col>
         </Form.Group>
 

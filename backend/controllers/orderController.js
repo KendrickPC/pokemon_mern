@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler'
 import Order from '../models/orderModel.js'
 
 // @desc    Create new order
-// @route   GET /api/products
+// @route   POST /api/products
 // @access  Private
 const addOrderItems = asyncHandler(async (req, res) => {
   const {
@@ -18,6 +18,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
   if (orderItems && orderItems.length === 0) {
     res.status(400)
     throw new Error('No order items')
+    return // For testing purposes...
   } else {
     const order = new Order({
       orderItems, 
@@ -62,15 +63,15 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
     order.isPaid = true
     order.paidAt = Date.now()
     // The following object comes from the PayPal response
-    order.paymentMethod = JSON.stringify({
+    order.paymentResult = {
       id: req.body.id,
       status: req.body.status,
       update_time: req.body.update_time,
       email_address: req.body.payer.email_address
-    })
+    }
 
-    await order.save()
-    res.json(order)
+    const updatedOrder = await order.save()
+    res.json(updatedOrder)
 
   } else {
     res.status(404)
