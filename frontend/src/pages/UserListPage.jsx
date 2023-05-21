@@ -7,8 +7,6 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listUsers, deleteUser } from '../actions/userActions'
 
-
-
 const UserListPage = ({history}) => {
   const dispatch = useDispatch()
 
@@ -33,7 +31,7 @@ const UserListPage = ({history}) => {
     } else {
       history.push('/login')
     }
-  }, [dispatch, history, successDelete])
+  }, [dispatch, history, successDelete, userInfo])
 
   return (
     <>
@@ -61,7 +59,7 @@ const UserListPage = ({history}) => {
                   )}  
                 </td>
                 <td>
-                  <LinkContainer to={`/user/${user._id}/edit`}>
+                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
                     <Button variant='light' className='btn-sm'>
                       <i className='fas fa-edit'></i>
                     </Button>
