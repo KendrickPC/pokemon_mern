@@ -5,7 +5,6 @@ import {
   Col,
   ListGroup,
   Image,
-  Card
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom/';
 

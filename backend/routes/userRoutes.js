@@ -4,9 +4,10 @@ import {
   authUser,
   getUserProfile,
   registerUser,
-  updateUserProfile
+  updateUserProfile,
+  getAllUsers
 } from '../controllers/userController.js'
-import { protect } from '../middleware/authMiddleware.js'
+import { protect, isAdmin } from '../middleware/authMiddleware.js'
 
 // localhost:3000/api/users/login
 router.post('/login', authUser)
@@ -17,8 +18,10 @@ router.put('/profile', protect, updateUserProfile)
 // localhost:3000/api/users/profile
 router.get('/profile', protect, getUserProfile)
 
-
 // localhost:3000/api/users
 router.post('/', registerUser)
+
+// localhost:3000/api/users
+router.get('/', protect, isAdmin, getAllUsers)
 
 export default router
