@@ -9,19 +9,26 @@ import { listUsers } from '../actions/userActions'
 
 
 
-const UserListPage = () => {
+const UserListPage = ({history}) => {
   const dispatch = useDispatch()
 
   const userList = useSelector(state => state.userList)
   const {loading, error, users}  = userList
+  
+  const userLogin = useSelector(state => state.userLogin)
+  const {userInfo}  = userLogin
 
   const deleteHandler = (id) => {
     console.log('deleteHandler')
   }
 
   useEffect( () => {
-    dispatch(listUsers())
-  }, [dispatch])
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listUsers())
+    } else {
+      history.push('/login')
+    }
+  }, [dispatch, history])
 
   return (
     <>
@@ -57,7 +64,6 @@ const UserListPage = () => {
                   <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(user._id)}>
                     <i className='fas fa-trash'></i>
                   </Button>
-
                 </td>
               </tr>
             ))}
