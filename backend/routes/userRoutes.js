@@ -5,7 +5,8 @@ import {
   getUserProfile,
   registerUser,
   updateUserProfile,
-  getAllUsers
+  getAllUsers,
+  deleteUser
 } from '../controllers/userController.js'
 import { protect, isAdmin } from '../middleware/authMiddleware.js'
 
@@ -23,5 +24,8 @@ router.post('/', registerUser)
 
 // localhost:3000/api/users
 router.get('/', protect, isAdmin, getAllUsers)
+
+// localhost:3000/api/users/:id
+router.delete('/:id', protect, isAdmin, deleteUser)
 
 export default router
