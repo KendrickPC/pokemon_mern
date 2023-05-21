@@ -22,8 +22,14 @@ const UserEditPage = ({match, history}) => {
   const {user, loading, error } = userDetails
 
   useEffect( () => {
-
-  }, [])
+    if (!user.name || user._id !== userId) {
+      dispatch(getUserDetails(userId))
+    } else {
+      setName(user.name)
+      setEmail(user.email)
+      setIsAdmin(user.isAdmin)
+    }
+  }, [dispatch, userId, user])
 
   const submitHandler = (evt) => {
     evt.preventDefault()
