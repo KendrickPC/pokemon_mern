@@ -8,7 +8,9 @@ import Loader from '../components/Loader'
 import { 
   listProducts,
   deleteProduct,
+  createProduct
 } from '../actions/productActions'
+import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 
 const ProductListPage = ({history, match}) => {
   const dispatch = useDispatch()
@@ -23,6 +25,14 @@ const ProductListPage = ({history, match}) => {
     success: successDelete
   }  = productDelete
 
+  const productCreate = useSelector(state => state.productCreate)
+  const {
+    loading: loadingCreate, 
+    error: errorCreate, 
+    success: successCreate,
+    product: createdProduct
+  }  = productCreate
+  
   const userLogin = useSelector(state => state.userLogin)
   const {userInfo}  = userLogin
   
@@ -32,17 +42,21 @@ const ProductListPage = ({history, match}) => {
     }
   }
 
-  const createProductHandler = (product) => {
-    // Create Product
+  const createProductHandler = () => {
+    dispatch(createProduct())
   }
 
   useEffect( () => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listProducts())
-    } else {
+    dispatch({type: PRODUCT_CREATE_RESET})
+    if (!userInfo.isAdmin) {
       history.push('/login')
     }
-  }, [dispatch, history, userInfo, successDelete])
+    if (successCreate) {
+      history.push(`/admin/product/${createdProduct._id}/edit`)
+    } else {
+      dispatch(listProducts())
+    }
+  }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct])
 
   return (
     <>
@@ -58,6 +72,8 @@ const ProductListPage = ({history, match}) => {
       </Row>
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+      {loadingCreate && <Loader />}
+      {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
       {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
         <Table striped bordered hover responsive className='table-sm'>
           <thead>
