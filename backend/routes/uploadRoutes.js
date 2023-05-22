@@ -54,7 +54,7 @@ router.post('/', protect, isAdmin, upload.single('image'), errorHandler, (req, r
     //catch by custom error handler
     //next(new Error('Please select file')) //mandatory if inside async function otherwise use express-async-handler which will also redirect implicit errors to custom error handler
   }
-  //replace '\' with '/' because Microsoft Windows supoorts '\' as directory separator
+  //replace '\' with '/' because Microsoft Windows supports '\' as directory separator
   res.send(`/${req.file.path.replace('\\', '/')}`) 
   // res.send(`/${req.file.path}`)
 })
