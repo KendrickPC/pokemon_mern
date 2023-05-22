@@ -39,7 +39,7 @@ const ProductEditPage = ({match, history}) => {
         dispatch(listProductDetails(productId))
       } else {
         setName(product.name)
-        setPrice(product.email)
+        setPrice(product.price)
         setImage(product.image)
         setBrand(product.brand)
         setCategory(product.category)
