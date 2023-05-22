@@ -54,3 +54,45 @@ router.post('/s3', uploadS3.single('image'), (req, res) => {
 })
 export default router
 ```
+
+```shell
+# .env file
+ACCESS_KEY_ID=YOUR_ACCESS_KEY_ID
+SECRET_ACCESS_KEY=YOUR_SECRET_ACCESS_KEY
+BUCKET_NAME=YOUR_BUCKET_NAME
+DATABASE_URL=YOUR_DATABASE_URL
+```
+
+```js
+// config/config.js
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+const config = {
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+  bucketName: process.env.BUCKET_NAME,
+  databaseURL: process.env.DATABASE_URL,
+}
+
+export default config
+```
+
+```js
+// uploadRoutes.js
+
+import config from '../config'
+
+// Access the values from the config object
+const accessKeyId = config.accessKeyId
+const secretAccessKey = config.secretAccessKey
+const bucketName = config.bucketName
+const databaseURL = config.databaseURL
+
+// Use the values in your code
+aws.config.update({
+  accessKeyId,
+  secretAccessKey,
+})
+```
