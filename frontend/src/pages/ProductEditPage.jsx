@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -21,6 +22,7 @@ const ProductEditPage = ({match, history}) => {
   const [category, setCategory] = useState('')
   const [countInStock, setCountInStock] = useState(0)
   const [description, setDescription] = useState('')
+  const [uploading, setUploading] = useState(false)
   
   const dispatch = useDispatch()
 
@@ -30,6 +32,28 @@ const ProductEditPage = ({match, history}) => {
   const productUpdate = useSelector(state => state.productUpdate)
   const {loading: loadingUpdate, error: errorUpdate, success: successUpdate } = productUpdate
   
+  const uploadFileHandler = async (evt) => {
+    // Only accessing single file (first file in array) instead of allowing user to upload multiple files
+    const file = evt.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+      const {data} = await axios.post('/api/upload', formData, config)
+      // Setting image as the "path"
+      setImage(data)
+      setUploading(false)
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
+  }
+
   useEffect( () => {
     if (successUpdate) {
       dispatch({type: PRODUCT_UPDATE_RESET})
@@ -104,6 +128,11 @@ const ProductEditPage = ({match, history}) => {
             value={image}
             onChange={(evt) => setImage(evt.target.value)}
           ></Form.Control>
+          <Form.Control
+            type='file'
+            onChange={uploadFileHandler}
+          ></Form.Control>
+          {uploading && <Loader />}
         </Form.Group>
         {/* brand group */}
         <Form.Group controlId='brand'>
