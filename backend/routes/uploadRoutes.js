@@ -1,6 +1,7 @@
 import express from "express";
 import multer from "multer";
 import path from 'path'
+import {protect, isAdmin} from '../middleware/authMiddleware.js'
 const router = express.Router()
 
 // DiskStorage documentation
@@ -38,7 +39,7 @@ const upload = multer({
 })
 
 // Creating endpoint for image uploads
-router.post('/', upload.single('image'), (req, res) => {
+router.post('/', protect, isAdmin, upload.single('image'), (req, res) => {
   res.send(`/${req.file.path}`)
 })
 

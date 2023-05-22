@@ -15,6 +15,9 @@ import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 const ProductEditPage = ({match, history}) => {
   const productId = match.params.id
 
+  const userLogin = useSelector(state => state.userLogin)
+  const {userInfo} = userLogin
+
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
   const [image, setImage] = useState('')
@@ -41,7 +44,8 @@ const ProductEditPage = ({match, history}) => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${userInfo.token}`
         }
       }
       const {data} = await axios.post('/api/upload', formData, config)
