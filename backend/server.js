@@ -32,14 +32,11 @@ app.get('/api/config/paypal', (req, res) =>
 )
 
 // Making the "uploads" folder "static" in Express
-// Defines the __dirname__ variable and assigns it the value of the resolved absolute path of the current working directory. 
-// The path.resolve() function resolves the absolute path of the directory in which the currently executing script resides. It ensures that __dirname__ points to the correct directory, even if the script is being run from a different location.
+// Defines the __dirname__ variable and assigns it the resolved absolute path of the current working directory, ensuring that it points to the correct directory even when the script is executed from a different location, and makes the "uploads" folder static in Express by serving its files as static files.
 const __dirname__ = path.resolve()
-// Sets up a static file middleware in Express. It tells Express to serve the files in the "uploads" folder as static files, making them accessible to clients.
-// The express.static() function creates a middleware function that serves static files from the specified directory. 
-// In this case, it serves files from the "uploads" directory. The path.join() function is used to join the __dirname__ variable with the "/uploads" path segment to form the complete path to the "uploads" folder.
+// Sets up a static file middleware in Express to serve the files in the "uploads" folder as static files, making them accessible to clients by joining the __dirname__ variable with the "/uploads" path segment.
 app.use('/uploads', express.static(path.join(__dirname__, '/uploads')))
-// By using the above two lines of code, any files stored in the "uploads" folder will be available for access and download through the /uploads URL path in our Express application. 
+// Allows files stored in the "uploads" folder to be accessed and downloaded through the /uploads URL path in the Express application.
 // For example, if we have a file named "pikachu.jpg" in the "uploads" folder, it can be accessed at http://yourdomain.com/uploads/pikachu.jpg
 
 
