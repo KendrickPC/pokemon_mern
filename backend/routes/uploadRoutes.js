@@ -38,9 +38,25 @@ const upload = multer({
   }
 })
 
+const errorHandler = (err, req, res, next) => {
+  //error handler gets called only when catches error
+  if (err instanceof multer.MulterError) {
+    res.status(400)
+  }
+  next(err) //redirect to custom error handler
+}
+
 // Creating endpoint for image uploads
-router.post('/', protect, isAdmin, upload.single('image'), (req, res) => {
-  res.send(`/${req.file.path}`)
+router.post('/', protect, isAdmin, upload.single('image'), errorHandler, (req, res) => {
+  if (!req.file) {
+    res.status(400)
+    throw new Error('Please select file') 
+    //catch by custom error handler
+    //next(new Error('Please select file')) //mandatory if inside async function otherwise use express-async-handler which will also redirect implicit errors to custom error handler
+  }
+  //replace '\' with '/' because Microsoft Windows supoorts '\' as directory separator
+  res.send(`/${req.file.path.replace('\\', '/')}`) 
+  // res.send(`/${req.file.path}`)
 })
 
 
