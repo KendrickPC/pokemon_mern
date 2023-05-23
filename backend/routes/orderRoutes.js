@@ -4,12 +4,16 @@ import {
   addOrderItems,
   getOrderById,
   updateOrderToPaid,
-  getMyOrders
+  getMyOrders,
+  getAllOrders
 } from '../controllers/orderController.js'
-import { protect } from '../middleware/authMiddleware.js'
+import { protect, isAdmin } from '../middleware/authMiddleware.js'
 
 // localhost:3000/api/orders
 router.post('/', protect, addOrderItems)
+
+// localhost:3000/api/orders
+router.get('/', protect, isAdmin, getAllOrders)
 
 // localhost:3000/api/orders/myorders
 router.get('/myorders', protect, getMyOrders)
