@@ -36,7 +36,7 @@ app.get('/api/config/paypal', (req, res) =>
 const __dirname__ = path.resolve()
 // Sets up a static file middleware in Express to serve the files in the "uploads" folder as static files, making them accessible to clients by joining the __dirname__ variable with the "/uploads" path segment.
 app.use('/uploads', express.static(path.join(__dirname__, '/uploads')))
-// Allows files stored in the "uploads" folder to be accessed and downloaded through the /uploads URL path in the Express application.
+// The above two lines allows files stored in the "uploads" folder to be accessed and downloaded through the /uploads URL path in the Express application.
 // For example, if we have a file named "pikachu.jpg" in the "uploads" folder, it can be accessed at http://yourdomain.com/uploads/pikachu.jpg
 
 

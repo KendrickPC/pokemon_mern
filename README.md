@@ -8,7 +8,7 @@ npm run start
 
 TO DO LIST:
 
-- [] REFACTOR uploadRoutes.js to incorporate aws multerS3
+-[x] REFACTOR uploadRoutes.js to incorporate aws multerS3
 
 ```js
 import express from 'express'
@@ -96,3 +96,5 @@ aws.config.update({
   secretAccessKey,
 })
 ```
+
+-[x] Use moment to clean up date
