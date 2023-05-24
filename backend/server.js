@@ -1,6 +1,7 @@
 import path from 'path'
 import express from 'express'
 import dotenv from 'dotenv'
+import morgan from 'morgan'
 import connectDB from './config/database.js'
 
 import productRoutes from './routes/productRoutes.js'
@@ -15,6 +16,11 @@ dotenv.config()
 connectDB()
 
 const app = express()
+
+// only running morgan in dev mode
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'))
+}
 
 app.use(express.json())
 
