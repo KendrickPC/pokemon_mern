@@ -4,6 +4,7 @@ import {
   addOrderItems,
   getOrderById,
   updateOrderToPaid,
+  updateOrderToDelivered,
   getMyOrders,
   getAllOrders
 } from '../controllers/orderController.js'
@@ -23,6 +24,9 @@ router.get('/:id', protect, getOrderById)
 
 // localhost:3000/api/orders/:id/pay
 router.put('/:id/pay', protect, updateOrderToPaid)
+
+// localhost:3000/api/orders/:id/deliver
+router.put('/:id/deliver', protect, isAdmin, updateOrderToDelivered)
 
 
 
