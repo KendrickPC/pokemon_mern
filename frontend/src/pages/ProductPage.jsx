@@ -36,6 +36,7 @@ const ProductPage = ({history, match}) => {
   
   const productReviewCreate = useSelector(state => state.productReviewCreate)
   const { 
+    // loading: loadingProductReview,
     success: successProductReview, 
     error: errorProductReview
   } = productReviewCreate
@@ -47,7 +48,6 @@ const ProductPage = ({history, match}) => {
       setComment('')
       dispatch({type: PRODUCT_CREATE_REVIEW_RESET})
     }
-
     dispatch(listProductDetails(match.params.id))
   }, [dispatch, match, successProductReview])
   
