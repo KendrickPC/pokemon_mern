@@ -14,7 +14,7 @@ const SearchBar = ({history}) => {
   }
 
   return (
-    <Form onSubmit={submitHandler} inline>
+    <Form onSubmit={submitHandler} className='d-flex'>
       <Form.Control 
         className='mr-sm-2 ml-sm-5'
         type='text'
@@ -26,6 +26,7 @@ const SearchBar = ({history}) => {
         className='p-2'
         type='submit'
         variant='outline-success'
+        id='searchbar-button'
       >
         Search
       </Button>
