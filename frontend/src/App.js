@@ -42,7 +42,11 @@ const App = () => {
           <Route path='/admin/user/:id/edit' component={UserEditPage}/>
           <Route path='/admin/product/:id/edit' component={ProductEditPage}/>
           <Route path='/admin/orderlist' component={OrderListPage}/>
-          <Route path='/search/:keyword' component={HomePage}/> 
+          <Route path='/search/:keyword' component={HomePage} exact/>
+          {/* pagination */}
+          <Route path='/page/:pageNumber' component={HomePage} exact />
+          {/* pagination for search results */}
+          <Route path='/search/:keyword/page/:pageNumber' component={HomePage} exact />
         </Container>
         
       </main>
