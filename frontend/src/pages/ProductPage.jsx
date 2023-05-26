@@ -14,6 +14,7 @@ import {
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Meta from '../components/Meta'
 import { 
   listProductDetails,
   createProductReview,
@@ -68,6 +69,7 @@ const ProductPage = ({history, match}) => {
       <Link className='btn btn-light my-3' to='/'>Go Back</Link>
       {loading ? (<Loader />) : error ? (<Message variant="danger">{error}</Message>) : (
       <>
+      <Meta title={product.name} />
       <Row className='justify-content-center'>
       <Col md={6}>
         <Image src={product.image} alt={product.name} fluid/>
