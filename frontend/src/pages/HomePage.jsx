@@ -5,9 +5,8 @@ import Product from '../components/Product'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
+import ProductCarousel from '../components/ProductCarousel'
 import {listProducts} from '../actions/productActions'
-
-
 
 const HomePage = ({match}) => {
   const keyword = match.params.keyword
@@ -24,6 +23,7 @@ const HomePage = ({match}) => {
 
   return (
     <>
+      {!keyword && <ProductCarousel /> }
       <h1>Latest Cards</h1>
       {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
         <>
